@@ -1,0 +1,8 @@
+name: TM Icecream
+description: 'Icecream module'
+package: Thomas More
+
+type: module
+core: 8.x
+
+dependencies: system
