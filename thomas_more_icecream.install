@@ -32,8 +32,8 @@ function thomas_more_icecream_schema(){
   return $schema;
 }
 
-function thomas_more_icecream_update_8001(&$sandbox){
-  $table = thomas_more_social_media_schema();
+function thomas_more_icecream_update_8002(&$sandbox){
+  $table = thomas_more_icecream_schema();
   \Drupal::database()->schema()->createTable('thomas_more_icecream_food',
     $table['thomas_more_icecream_food']);
 }
