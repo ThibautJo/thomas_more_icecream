@@ -23,8 +23,10 @@ class IceCreamBLock extends BlockBase {
    */
 
   public function build(){
-    return array(
-      '#markup' => $this->t('hoi'),
-    );
+
+    //form ophalen
+    $form = \Drupal::formBuilder()->getForm('\Drupal\thomas_more_icecream\Form\IceCreamForm');
+
+    return $form;
   }
 }
