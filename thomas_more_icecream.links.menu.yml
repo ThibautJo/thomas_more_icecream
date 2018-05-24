@@ -3,3 +3,9 @@ thomas_more_icecream.admin.manageOrders:
   parent: system.admin_config_ui
   description: 'Reset icecream orders.'
   route_name: thomas_more_icecream.admin.manageOrders
+
+thomas_more_icecream.admin.set_form:
+  title: 'Icecream manage options'
+  parent: system.admin_config_ui
+  description: 'manage icecream options.'
+  route_name: thomas_more_icecream.admin.set_form
