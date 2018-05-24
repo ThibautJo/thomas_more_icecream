@@ -34,15 +34,22 @@ class IceCreamManager {
     $query->condition('type', $food);
     return $query->execute();
   }
+
   public function checkThreshold(){
+    $message = '';
+
     if($this->state->get('threshold_icecream')>=$this->getFoodOrders('ijs')){
-      $this->removeFoods('ijs');
-      return 'icecream threshold berijkt';
+      //$this->removeFoods('ijs');
+      $message = 'Ijs threshold bereikt';
     }
+
     if($this->state->get('threshold_waffle')>=$this->getFoodOrders('wafel')){
-      $this->removeFoods('wafel');
-      return 'waffle threshold berijkt';
+      //$this->removeFoods('wafel');
+      $db = $this->getFoodOrders('wafel');
+      $threshold = $this->state->get('threshold_waffle');
+      $message = 'Wafel: ' . $threshold . ' ' . $db;
     }
-    return 'Geen threshold berijkt';
+
+    return $message;
   }
 }

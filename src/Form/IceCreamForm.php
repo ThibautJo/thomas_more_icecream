@@ -105,13 +105,14 @@ class IceCreamForm extends FormBase {
 
     $food = $form_state->getValue('keuzes');
 
-    if ($food = 'Ijs'){
+    if ($food == 'ijs'){
       $description = $description_ijs;
     } else {
       $description = $description_wafel;
     }
 
     $this->creamManager->addFood($food, $description);
+    $this->creamManager->checkThreshold();
     drupal_set_message('Bestelling: '. $food . ' met extra\'s: ' . $description);
   }
 }
