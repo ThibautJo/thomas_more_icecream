@@ -1,6 +1,6 @@
 <?php
 function thomas_more_icecream_schema(){
-  $schema['thomas_more_social_media_counter'] = [
+  $schema['thomas_more_icecream_food'] = [
     'fields' => [
       'id' => [
         'description' => 'The primary identifier.',
