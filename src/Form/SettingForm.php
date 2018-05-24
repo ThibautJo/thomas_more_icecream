@@ -1,5 +1,5 @@
 <?php
-namespace Drupal\thomas_more_social_media\Form;
+namespace Drupal\thomas_more_icecream\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
