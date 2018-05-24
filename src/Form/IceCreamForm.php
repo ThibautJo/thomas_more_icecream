@@ -48,6 +48,13 @@ class IceCreamForm extends FormBase {
 
     $form['toppings'] = [
       '#type' => 'checkboxes',
+      /*'#states' => [
+        'visible' => array(
+          ':input[name="keuzes]' => array(
+           'value' => 'wafel',
+          ),
+        ),
+      ],*/
       '#title' => 'Kies een topping voor de wafel',
       '#options' => $toppings
     ];
