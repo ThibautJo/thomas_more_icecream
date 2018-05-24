@@ -3,27 +3,25 @@
 namespace Drupal\thomas_more_icecream\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\State\StateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\thomas_more_social_media\ClickManager;
 
 /**
- * Defines a social menu block
+ * Defines an icecream block
  *
  * @Block(
- *   id = "thomas_more_social_media_block",
- *   admin_label = @Translation("Social media"),
+ *   id = "thomas_more_icecream_block",
+ *   admin_label = @Translation("Icecream"),
  *  )
  */
 
-class IceCreamBLock extends BlockBase {
+class IceCreamBlock extends BlockBase {
 
   /**
    * {@inheritdoc}
    */
 
   public function build(){
-    return "hoi";
+    return array(
+      '#markup' => $this->t('Hello World!'),
+    );
   }
 }
