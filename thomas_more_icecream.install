@@ -1,6 +1,6 @@
 <?php
 function thomas_more_icecream_schema(){
-  $schema['thomas_more_icecream_order'] = [
+  $schema['thomas_more_icecream_food'] = [
     'fields' => [
       'id' => [
         'description' => 'The primary identifier.',
@@ -19,7 +19,7 @@ function thomas_more_icecream_schema(){
       'extra' => [
         'description' => 'Bij een ijsje is dit de smaak bij een wafel de topping',
         'type' => 'varchar',
-        'unsigned' => 32,
+        'length' => 32,
         'not null' => TRUE,
         'default' => '',
       ],
@@ -32,8 +32,8 @@ function thomas_more_icecream_schema(){
   return $schema;
 }
 
-function thomas_more_icecream_update_8004(&$sandbox){
+function thomas_more_icecream_update_8004(&$sandbox) {
   $table = thomas_more_icecream_schema();
-  \Drupal::database()->schema()->createTable('thomas_more_icecream_order',
-    $table['thomas_more_icecream_order']);
+  \Drupal::database()->schema()->createTable('thomas_more_icecream_food',
+    $table['thomas_more_icecream_food']);
 }
