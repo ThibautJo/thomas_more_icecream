@@ -11,19 +11,23 @@ namespace Drupal\thomas_more_icecream\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\State\StateInterface;
+use Drupal\thomas_more_icecream\IceCreamManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class IceCreamForm extends FormBase {
 
   protected $state;
+  protected $creamManager;
 
-  public function __construct(StateInterface $state) {
+  public function __construct(StateInterface $state, IceCreamManager $creamManager) {
     $this->state = $state;
+    $this->creamManager = $creamManager;
   }
 
   public static function create(ContainerInterface $container){
     return new static (
-        $container->get('state')
+        $container->get('state'),
+        $container->get('thomas_more_icecream.icecream_manager')
     );
   }
 
@@ -33,10 +37,25 @@ class IceCreamForm extends FormBase {
 
   public function buildForm(array $form, FormStateInterface $form_state){
     $opties = array('ijs' => 'Ijsje', 'wafel' => 'Wafel');
+    $toppings = array('slagroom' => 'Slagroom', 'chocola' => 'Chocola');
+    $smaken = array('vanille' => 'Vanille', 'chocola' => 'Chocola', 'banaan' => 'Banaan');
+
     $form['keuzes'] = [
       '#type' => 'radios',
       '#title' => 'Maak uw keuze',
       '#options' => $opties
+    ];
+
+    $form['toppings'] = [
+      '#type' => 'checkboxes',
+      '#title' => 'Kies een topping voor de wafel',
+      '#options' => $toppings
+    ];
+
+    $form['smaken'] = [
+      '#type' => 'checkboxes',
+      '#title' => 'Kies smaken voor ijsje',
+      '#options' => $smaken
     ];
 
     $form['submit'] = [
@@ -49,6 +68,27 @@ class IceCreamForm extends FormBase {
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state){
+    $description = '';
 
+    if(! empty($form_state->getValue('toppings'))){
+      foreach ($form_state->getValue('toppings') as $topping){
+        if (! empty($topping)) {
+          $description .= $topping . ', ';
+        }
+      }
+    }
+
+    if(! empty($form_state->getValue('smaken'))){
+      foreach ($form_state->getValue('smaken') as $smaak){
+        if (! empty($smaak)) {
+          $description .= $smaak . ', ';
+        }
+      }
+    }
+
+    $food = $form_state->getValue('keuzes');
+
+    $this->creamManager->addFood($food, $description);
+    drupal_set_message('Bestelling: '. $food . ' met extra\'s: ' . $description);
   }
 }

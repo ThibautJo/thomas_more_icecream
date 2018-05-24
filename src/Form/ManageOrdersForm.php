@@ -33,8 +33,8 @@ class ManageOrdersForm extends FormBase{
     $form['foods'] = [
       '#type' => 'checkboxes',
       '#options' => [
-        'ijsjes' => 'Ijsjes',
-        'Wafels' => 'wafels',
+        'ijs' => 'Ijsjes',
+        'wafel' => 'wafels',
       ],
     ];
 
@@ -49,7 +49,7 @@ class ManageOrdersForm extends FormBase{
   public function submitForm(array &$form, FormStateInterface $form_state) {
     foreach($form_state->getValue('foods') as $foods) {
 
-      if(!empty($network)) {
+      if(!empty($foods)) {
         $this->iceCreamManager->removeFoods($foods);
       }
     }
