@@ -32,10 +32,11 @@ class IceCreamForm extends FormBase {
   }
 
   public function buildForm(array $form, FormStateInterface $form_state){
+    $opties = array('ijs' => 'Ijsje', 'wafel' => 'Wafel');
     $form['keuzes'] = [
       '#type' => 'radios',
       '#title' => 'Maak uw keuze',
-      '#options' => $this->state->get('thomas_more_icecream.opties')
+      '#options' => $opties
     ];
 
     $form['submit'] = [
@@ -43,6 +44,8 @@ class IceCreamForm extends FormBase {
       '#value' => 'Geef keuze door',
       '#button_type' => 'primary'
     ];
+
+    return $form;
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state){
