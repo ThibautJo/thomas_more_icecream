@@ -27,6 +27,10 @@ class ManageOptiesForm extends FormBase{
   }
 
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $form['header'] = [
+      '#markup' => '<h2>Toppings & smaken toevoegen</h2>',
+    ];
+
     $form['input'] = [
       '#type' => 'textfield',
       '#title' => 'Input',
@@ -53,7 +57,7 @@ class ManageOptiesForm extends FormBase{
 
   }
 
-  public function topping_submit(array &$form, FormStateInterface $form_state) {
+  public function toppings_submit(array &$form, FormStateInterface $form_state) {
     if(!empty($form_state->getValue('input'))){
       $opties = $this->state->get('toppings', []);
       $opties[$form_state->getValue('input')] = $form_state->getValue('input');

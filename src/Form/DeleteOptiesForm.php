@@ -27,31 +27,56 @@ class DeleteOptiesForm extends FormBase{
   }
 
   public function buildForm(array $form, FormStateInterface $form_state) {
-    echo "<h1>hoi</h1>";
-
-    $form['input'] = [
-      '#type' => 'textfield',
-      '#title' => 'Input',
-      '#default_value' => 'Vul topping of smaak in',
+    $form['header'] = [
+      '#markup' => '<h2>Toppings & smaken verwijderen</h2>',
     ];
 
-    $form['submit1'] = [
-      '#type' => 'submit',
-      '#value' => 'Als topping Toevoegen',
-      '#button_type' => 'primary',
-      '#submit' => array('::toppings_submit'),
+    $toppings = $this->state->get('toppings');
+    $smaken = $this->state->get('smaken');
+
+    $form['toppings'] = [
+      '#type' => 'checkboxes',
+      '#title' => 'Toppings',
+      '#options' => $toppings
     ];
 
-    $form['submit2'] = [
+    $form['smaken'] = [
+      '#type' => 'checkboxes',
+      '#title' => 'Smaken',
+      '#options' => $smaken
+    ];
+
+    $form['submit'] = [
       '#type' => 'submit',
-      '#value' => 'Als smaak Toevoegen',
+      '#value' => 'Geselecteerden verwijderen',
       '#button_type' => 'primary',
-      '#submit' => array('::smaak_submit'),
     ];
     return $form;
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state){
+    $toppings = $this->state->get('toppings');
+    $smaken = $this->state->get('smaken');
 
+    if(!empty($form_state->getValue('toppings'))){
+      foreach ($form_state->getValue('toppings') as $topping){
+        if (! empty($topping)) {
+          unset($toppings[$topping]);
+        }
+      }
+    }
+
+    if(!empty($form_state->getValue('smaken'))){
+      foreach ($form_state->getValue('smaken') as $smaak){
+        if (! empty($smaak)) {
+          unset($smaken[$smaak]);
+        }
+      }
+    }
+
+    $this->state->set('toppings', $toppings);
+    $this->state->set('smaken', $smaken);
+
+    drupal_set_message('De geselecteerde smaken/opties zijn verwijderd.');
   }
 }
