@@ -4,15 +4,24 @@ namespace Drupal\thomas_more_icecream;
 
 use Drupal\Core\Database\Connection;
 use Drupal\Core\State\StateInterface;
+//use Drupal\Core\Mail\MailManager;
 
 
 class IceCreamManager {
   protected $connection;
   protected $state;
+  //protected $mailManager;
 
   public function __construct(Connection $connection, StateInterface $state) {
     $this->connection = $connection;
     $this->state = $state;
+    //$this->mailManager = $mailManager;
+  }
+
+  public function getFood(string $food){
+    $query = $this->connection->select('thomas_more_icecream_food', 't');
+    $query->condition('t.type', $food);
+    return $query->execute()->fetchAll();
   }
 
   public function getFoodOrders(string $food){
@@ -36,20 +45,21 @@ class IceCreamManager {
   }
 
   public function checkThreshold(){
-    $message = '';
 
-    if($this->state->get('threshold_icecream')>=$this->getFoodOrders('ijs')){
-      //$this->removeFoods('ijs');
-      $message = 'Ijs threshold bereikt';
+    if($this->state->get('threshold_icecream')<=$this->getFoodOrders('ijs')){
+      $this->removeFoods('ijs');
+      drupal_set_message('icecream threshold bereikt');
+    }
+    if($this->state->get('threshold_waffle')<=$this->getFoodOrders('wafel')){
+      $this->removeFoods('wafel');
+      drupal_set_message('wafel threshold bereikt');
     }
 
-    if($this->state->get('threshold_waffle')>=$this->getFoodOrders('wafel')){
-      //$this->removeFoods('wafel');
-      $db = $this->getFoodOrders('wafel');
-      $threshold = $this->state->get('threshold_waffle');
-      $message = 'Wafel: ' . $threshold . ' ' . $db;
-    }
-
-    return $message;
   }
+
+
+
+  /*public function sendMail(string $food){
+      $array = $this->getFood('$food');
+  }*/
 }
