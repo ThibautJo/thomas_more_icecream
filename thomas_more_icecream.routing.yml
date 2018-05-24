@@ -4,7 +4,7 @@ thomas_more_icecream.admin.manageOrders:
     _form: 'Drupal\thomas_more_icecream\Form\ManageOrdersForm'
   requirements:
     _permission: 'access administration pages'
-thomas_more_icecream.admin.set_threshold:
+thomas_more_icecream.admin.set_form:
   path: '/admin/config/user-interface/thomas-more-icecream/set-threshold'
   defaults:
     _form: 'Drupal\thomas_more_icecream\Form\SettingForm'
