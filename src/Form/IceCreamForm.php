@@ -36,9 +36,9 @@ class IceCreamForm extends FormBase {
   }
 
   public function buildForm(array $form, FormStateInterface $form_state){
-    $opties = array('ijs' => 'Ijsje', 'wafel' => 'Wafel');
-    $toppings = array('slagroom' => 'Slagroom', 'chocola' => 'Chocola');
-    $smaken = array('vanille' => 'Vanille', 'chocola' => 'Chocola', 'banaan' => 'Banaan');
+    $opties = array('ijs' => 'Ijs', 'wafel' => 'Wafel');
+    $toppings = $this->state->get('toppings');
+    $smaken = $this->state->get('smaken');
 
     $form['keuzes'] = [
       '#type' => 'radios',
