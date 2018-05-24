@@ -48,12 +48,26 @@ class IceCreamForm extends FormBase {
 
     $form['toppings'] = [
       '#type' => 'checkboxes',
+      '#states' => [
+        'visible' => array(
+          ':input[name="keuzes"]' => array(
+           'value' => 'wafel',
+          ),
+        ),
+      ],
       '#title' => 'Kies een topping voor de wafel',
       '#options' => $toppings
     ];
 
     $form['smaken'] = [
       '#type' => 'checkboxes',
+      '#states' => [
+        'visible' => array(
+          ':input[name="keuzes"]' => array(
+            'value' => 'ijs',
+          ),
+        ),
+      ],
       '#title' => 'Kies smaken voor ijsje',
       '#options' => $smaken
     ];
@@ -69,11 +83,13 @@ class IceCreamForm extends FormBase {
 
   public function submitForm(array &$form, FormStateInterface $form_state){
     $description = '';
+    $description_wafel = '';
+    $description_ijs='';
 
     if(! empty($form_state->getValue('toppings'))){
       foreach ($form_state->getValue('toppings') as $topping){
         if (! empty($topping)) {
-          $description .= $topping . ', ';
+          $description_wafel .= $topping . ', ';
         }
       }
     }
@@ -81,12 +97,19 @@ class IceCreamForm extends FormBase {
     if(! empty($form_state->getValue('smaken'))){
       foreach ($form_state->getValue('smaken') as $smaak){
         if (! empty($smaak)) {
-          $description .= $smaak . ', ';
+          $description_ijs .= $smaak . ', ';
         }
       }
     }
 
+
     $food = $form_state->getValue('keuzes');
+
+    if ($food = 'Ijs'){
+      $description = $description_ijs;
+    } else {
+      $description = $description_wafel;
+    }
 
     $this->creamManager->addFood($food, $description);
     drupal_set_message('Bestelling: '. $food . ' met extra\'s: ' . $description);

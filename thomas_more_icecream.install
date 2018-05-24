@@ -38,3 +38,4 @@ function thomas_more_icecream_update_8004(&$sandbox) {
   \Drupal::database()->schema()->createTable('thomas_more_icecream_food',
     $table['thomas_more_icecream_food']);
 }
+
