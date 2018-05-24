@@ -33,6 +33,8 @@ class IceCreamForm extends FormBase {
 
   public function buildForm(array $form, FormStateInterface $form_state){
     $opties = array('ijs' => 'Ijsje', 'wafel' => 'Wafel');
+    $toppings = array('');
+
     $form['keuzes'] = [
       '#type' => 'radios',
       '#title' => 'Maak uw keuze',
