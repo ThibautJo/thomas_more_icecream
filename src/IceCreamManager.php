@@ -21,7 +21,7 @@ class IceCreamManager {
   public function getFood(string $food){
     $query = $this->connection->select('thomas_more_icecream_food', 't');
     $query->condition('t.type', $food);
-    return $query->execute()->fetchAll();
+    return $query;
   }
 
   public function getFoodOrders(string $food){
@@ -31,6 +31,7 @@ class IceCreamManager {
   }
 
   public function addFood(string $food, string $description){
+    $this->sendMail('ijs');
     $this->connection->insert('thomas_more_icecream_food')
       ->fields([
         'type' => $food,
@@ -45,10 +46,12 @@ class IceCreamManager {
   }
   public function checkThreshold(){
     if($this->state->get('threshold_icecream')<=$this->getFoodOrders('ijs')){
+      $this->sendMail('ijs');
       $this->removeFoods('ijs');
       return 'icecream threshold berijkt';
     }
     if($this->state->get('threshold_waffle')<=$this->getFoodOrders('wafel')){
+      $this->sendMail('wafel');
       $this->removeFoods('wafel');
       return 'waffle threshold berijkt';
     }
@@ -58,6 +61,20 @@ class IceCreamManager {
 
 
   public function sendMail(string $food){
-      $array = $this->getFood('$food');
+    $message = 'Een bestelling voor '. (string)$food;
+      $array = $this->getFood((string)$food);
+      foreach ($array as $element){
+        $row = '<br/>-'. (string)$element['type'] . '  extra:' . (string)$element['extra'];
+        $array .= $row;
+      }
+      $this->mailManager->mail('icecream','key','g6fs2v3c5b74c4@gmail.com',
+        'nl',$message,$reply=NULL,$send= TRUE);
+  }
+  public function icecream_mail($key,&$message,$params){
+    switch($key){
+      case 'key':
+        $message['subject'] = t('test');
+        $message['body'][] = (string)$params;
+    }
   }
 }
