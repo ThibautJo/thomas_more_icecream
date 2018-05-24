@@ -32,11 +32,7 @@ function thomas_more_icecream_schema(){
   return $schema;
 }
 
-<<<<<<< HEAD
-function thomas_more_icecream_update_8001(&$sandbox){
-=======
 function thomas_more_icecream_update_8003(&$sandbox){
->>>>>>> 277907f3067cabbe4250f9a796cfe9e2b94b0f50
   $table = thomas_more_icecream_schema();
   \Drupal::database()->schema()->createTable('thomas_more_icecream_food',
     $table['thomas_more_icecream_food']);
