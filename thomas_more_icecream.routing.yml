@@ -16,3 +16,9 @@ thomas_more_icecream.admin.manageOpties:
     _form: 'Drupal\thomas_more_icecream\Form\ManageOptiesForm'
   requirements:
     _permission: 'access administration pages'
+thomas_more_icecream.admin.deleteOpties:
+  path: '/admin/config/user-interface/thomas-more-icecream/deleteOpties'
+  defaults:
+    _form: 'Drupal\thomas_more_icecream\Form\ManageOptiesForm'
+  requirements:
+    _permission: 'access administration pages'
