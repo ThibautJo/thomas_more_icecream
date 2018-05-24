@@ -18,6 +18,7 @@ use Drupal\thomas_more_social_media\ClickManager;*/
  */
 
 class IceCreamBLock extends BlockBase {
+
   /**
    * {@inheritdoc}
    */

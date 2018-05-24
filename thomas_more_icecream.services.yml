@@ -1,4 +1,8 @@
 services:
   thomas_more_icecream.icecream_manager:
     class: Drupal\thomas_more_icecream\IceCreamManager
+<<<<<<< HEAD
     arguments: ['@database','@state','@plugin.manager.mail']
+=======
+    arguments: ['@database','@state']
+>>>>>>> 5a3e8a3695a53425798dec988220a3150e295967

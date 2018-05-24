@@ -9,3 +9,15 @@ thomas_more_icecream.admin.set_form:
   parent: system.admin_config_ui
   description: 'manage icecream options.'
   route_name: thomas_more_icecream.admin.set_form
+
+thomas_more_icecream.admin.manageOpties:
+  title: 'Icecream opties toevoegen'
+  parent: system.admin_config_ui
+  description: 'Smaken en toppings toevoegen.'
+  route_name: thomas_more_icecream.admin.manageOpties
+
+thomas_more_icecream.admin.deleteOpties:
+  title: 'Icecream opties verwijderen'
+  parent: system.admin_config_ui
+  description: 'Smaken en toppings verwijderen.'
+  route_name: thomas_more_icecream.admin.deleteOpties

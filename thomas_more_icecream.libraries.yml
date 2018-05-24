@@ -1,0 +1,6 @@
+thomas_more_icecream:
+  version: VERSION
+  js:
+    assets/js/thomas_more_icecream.weather.js: {}
+  dependencies:
+    - core/jquery

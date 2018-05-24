@@ -36,9 +36,9 @@ class IceCreamForm extends FormBase {
   }
 
   public function buildForm(array $form, FormStateInterface $form_state){
-    $opties = array('ijs' => 'Ijsje', 'wafel' => 'Wafel');
-    $toppings = array('slagroom' => 'Slagroom', 'chocola' => 'Chocola');
-    $smaken = array('vanille' => 'Vanille', 'chocola' => 'Chocola', 'banaan' => 'Banaan');
+    $opties = array('ijs' => 'Ijs', 'wafel' => 'Wafel');
+    $toppings = $this->state->get('toppings');
+    $smaken = $this->state->get('smaken');
 
     $form['keuzes'] = [
       '#type' => 'radios',
@@ -105,13 +105,14 @@ class IceCreamForm extends FormBase {
 
     $food = $form_state->getValue('keuzes');
 
-    if ($food = 'Ijs'){
+    if ($food == 'ijs'){
       $description = $description_ijs;
     } else {
       $description = $description_wafel;
     }
 
     $this->creamManager->addFood($food, $description);
+    $this->creamManager->checkThreshold();
     drupal_set_message('Bestelling: '. $food . ' met extra\'s: ' . $description);
   }
 }
