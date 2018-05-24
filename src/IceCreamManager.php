@@ -2,18 +2,18 @@
 namespace Drupal\thomas_more_icecream;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\State\StateInterface;
-//use Drupal\Core\Mail\MailManager;
+use Drupal\Core\Mail\MailManager;
 class IceCreamManager {
 
   protected $connection;
 
   protected $state;
 
-  //protected $mailManager;
-  public function __construct(Connection $connection, StateInterface $state) {
+  protected $mailManager;
+  public function __construct(Connection $connection, StateInterface $state,MailManager $mailManager) {
     $this->connection = $connection;
     $this->state = $state;
-    //$this->mailManager = $mailManager;
+    $this->mailManager = $mailManager;
   }
 
   public function getFood(string $food) {
