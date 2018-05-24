@@ -21,3 +21,9 @@ thomas_more_icecream.admin.deleteOpties:
   parent: system.admin_config_ui
   description: 'Smaken en toppings verwijderen.'
   route_name: thomas_more_icecream.admin.deleteOpties
+
+thomas_more_icecream.admin.charts:
+  title: 'Order charts'
+  parent: system.admin_reports
+  description: 'Zie hoeveel van elke optie besteld is.'
+  route_name: thomas_more_icecream.admin.charts

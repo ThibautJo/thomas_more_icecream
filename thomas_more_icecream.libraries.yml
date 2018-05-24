@@ -4,3 +4,11 @@ thomas_more_icecream:
     assets/js/thomas_more_icecream.weather.js: {}
   dependencies:
     - core/jquery
+
+data_charts:
+  version: VERSION
+  js:
+      https://www.gstatic.com/charts/loader.js: { type: external }
+      assets/js/thomas_more_icecream.charts.js: {}
+  dependencies:
+      - core/drupalSettings

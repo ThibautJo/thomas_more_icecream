@@ -47,4 +47,9 @@ class IceCreamManager {
   /*public function sendMail(string $food){
       $array = $this->getFood('$food');
   }*/
+  public function aantalOrdersOptie(string $optie){
+    $query = $this->connection->select('thomas_more_icecream_food', 't');
+    $query->condition('t.extra', "%$optie%", 'LIKE');
+    return (int) $query->countQuery()->execute()->fetchField();
+  }
 }
